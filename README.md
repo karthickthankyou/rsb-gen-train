@@ -1,6 +1,6 @@
 # rsb-gen
 
-Automate react component creation with corresponding storybook component with simple command.
+Automate react component creation with a corresponding storybook component with a simple command.
 
 ```
 npx rsb-gen ComponentName
