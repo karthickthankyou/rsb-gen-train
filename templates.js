@@ -7,7 +7,6 @@ exports.component = (
     return (
       <div>
         Hello, This is ${componentName} component.
-        Added more text!
       </div>
     );
   };
