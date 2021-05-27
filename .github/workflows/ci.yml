@@ -28,5 +28,4 @@ jobs:
         run: |
           curl -X POST -H 'Content-type: application/json'
           --data '{"text":"New Release! ${{ github.event.release.tag_name}}!
-          <${{github.event.release.html_url}}|check it out!>"}'
-          ${{ secrets.SLACK_WEBHOOK }}
+          <${{github.event.release.html_url}}|check it out!>"}' ${{ secrets.SLACK_WEBHOOK }}
