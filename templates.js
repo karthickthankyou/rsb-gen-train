@@ -6,7 +6,7 @@ exports.component = (
   const ${componentName} = ({ }: I${componentName}Props) => {
     return (
       <div>
-        Hello, This is ${componentName} component.
+        🛬  Hello, This is ${componentName} component! 🛫
       </div>
     );
   };
