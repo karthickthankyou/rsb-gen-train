@@ -1,7 +1,6 @@
 module.exports = {
   branches: 'main',
-  repositoryUrl:
-    'https://github.com/karthickthankyou/bulletproof-boilerplate-train',
+  repositoryUrl: 'https://github.com/karthickthankyou/rsb-gen',
   plugins: [
     '@semantic-release/commit-analyzer',
     '@semantic-release/release-notes-generator',
