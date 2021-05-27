@@ -1,0 +1,22 @@
+{
+  "name": "rsb-gen",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "rsb-gen": "index.js"
+  },
+  "scripts": {
+    "format": "prettier --write \"./**/*.{js,json}\""
+  },
+  "keywords": [
+    "react component",
+    "storybook component",
+    "karthick"
+  ],
+  "author": "Karthick Ragavendran <hello@iamkarthick.com> (https://iamkarthick.com)",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "chalk": "^4.1.1"
+  }
+}
