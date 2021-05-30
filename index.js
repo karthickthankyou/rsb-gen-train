@@ -7,7 +7,7 @@ let { component, story, testScript, barrel } = require('./templates.js');
 const [componentName] = process.argv.slice(2);
 if (!componentName) {
   console.clear();
-  console.log(chalk.yellow(`You must include a component name.`));
+  console.log(chalk.yellow(`You must include a component name!`));
   console.log(
     chalk.hex('#aaa')(`Example: `),
     chalk.white(
