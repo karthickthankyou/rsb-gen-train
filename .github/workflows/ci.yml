@@ -26,9 +26,9 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
       # - run: echo ${{ toJson(github) }}
-      - name: Slack message
-        run: |
-          curl -X POST -H 'Content-type: application/json'
-          --data '{"text":"New Release!! <${{
-          github.event.repository.html_url }}|check it out!
-          >"}' ${{ secrets.SLACK_WEBHOOK }}
+      # - name: Slack message
+      #   run: |
+      #     curl -X POST -H 'Content-type: application/json'
+      #     --data '{"text":"New Release!! <${{
+      #     github.event.repository.html_url }}|check it out!
+      #     >"}' ${{ secrets.SLACK_WEBHOOK }}
