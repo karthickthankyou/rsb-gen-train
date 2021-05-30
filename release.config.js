@@ -1,6 +1,6 @@
 module.exports = {
   branches: 'main',
-  repositoryUrl: 'https://github.com/karthickthankyou/rsb-gen',
+  repositoryUrl: 'https://github.com/karthickthankyou/rsb-gen-train',
   plugins: [
     '@semantic-release/commit-analyzer',
     '@semantic-release/release-notes-generator',
