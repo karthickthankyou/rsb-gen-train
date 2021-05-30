@@ -1,6 +1,6 @@
 {
   "name": "rsb-gen",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Automate react component creation with corresponding storybook component with simple command.",
   "homepage": "https://www.chromatic.com",
   "bugs": {
