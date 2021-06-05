@@ -2,14 +2,13 @@
   "name": "rsb-gen",
   "version": "2.1.0",
   "description": "Automate react component creation with corresponding storybook component with simple command.",
-  "homepage": "https://www.chromatic.com",
+  "homepage": "https://github.com/karthickthankyou/rsb-gen-train",
   "bugs": {
-    "url": "https://github.com/chromaui/chromatic-cli",
-    "email": "support@chromatic.com"
+    "url": "https://github.com/karthickthankyou/rsb-gen-train",
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/chromaui/chromatic-cli.git"
+    "url": "https://github.com/karthickthankyou/rsb-gen-train.git"
   },
   "main": "index.js",
   "bin": {
