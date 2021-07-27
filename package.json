@@ -1,10 +1,10 @@
 {
     "name": "rsb-gen",
-    "version": "2.1.0",
+    "version": "3.0.0",
     "description": "Automate react component creation with corresponding storybook component with simple command.",
     "homepage": "https://github.com/karthickthankyou/rsb-gen-train",
     "bugs": {
-        "url": "https://github.com/karthickthankyou/rsb-gen-train",
+        "url": "https://github.com/karthickthankyou/rsb-gen-train"
     },
     "repository": {
         "type": "git",

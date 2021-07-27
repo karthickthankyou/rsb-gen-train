@@ -8,45 +8,46 @@ exports.component = (
       <div>
         🛬  Hello, This is ${componentName} component! 🛫
       </div>
-    );
-  };
+    )
+  }
 
-  export default ${componentName};
-  `;
+  export default ${componentName}
+  `
 
 // component.stories.tsx
-exports.story = (componentName, componentType) => `import React from 'react';
+exports.story = (componentName, componentType) => `import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import ${componentName} from './${componentName}';
+import ${componentName} from './${componentName}'
 
 export default {
     title: '${componentType || 'Pages'}/${componentName}',
     component: ${componentName},
 } as ComponentMeta<typeof ${componentName}>
 
-const Template: ComponentStory<typeof ${componentName}> = (args) => <${componentName} {...args} />;
+const Template: ComponentStory<typeof ${componentName}> = (args) => <${componentName} {...args} />
 
-export const Primary = Template.bind({});
-Primary.args = {};
-Primary.parameters = {};
-`;
+export const Primary = Template.bind({})
+Primary.args = {}
+Primary.parameters = {}
+`
 
 // component.test.tsx
-exports.testScript = (componentName) => `import React from 'react';
-import { render } from '@testing-library/react';
-import ${componentName} from './${componentName}';
+exports.testScript = (componentName) => `import React from 'react'
+import { render } from '@testing-library/react'
+import ${componentName} from './${componentName}'
 
 describe('${componentName} Component', () => {
   test('it should match the snapshot', () => {
-    const { asFragment } = render(<${componentName} />);
-    expect(asFragment()).toMatchSnapshot();
-  });
-});
-`;
+    const { asFragment } = render(<${componentName} />)
+    expect(asFragment()).toMatchSnapshot()
+  })
+})
+`
 
 // index.ts
 exports.barrel = (
   componentName,
-) => `import ${componentName} from './${componentName}';
-  export default ${componentName};
-  `;
+) => `import ${componentName} from './${componentName}'
+
+  export default ${componentName}
+  `
