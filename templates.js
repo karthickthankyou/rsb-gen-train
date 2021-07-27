@@ -16,18 +16,19 @@ exports.component = (
 
 // component.stories.tsx
 exports.story = (componentName, componentType) => `import React from 'react';
-import { Story, Meta } from '@storybook/react/types-6-0';
-import ${componentName}, { I${componentName}Props} from './${componentName}';
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+import ${componentName} from './${componentName}';
 
 export default {
     title: '${componentType || 'Pages'}/${componentName}',
     component: ${componentName},
-} as Meta;
+} as ComponentMeta<typeof ${componentName}>
 
-const Template: Story<I${componentName}Props> = (args) => <${componentName} {...args} />;
+const Template: ComponentStory<typeof ${componentName}> = (args) => <${componentName} {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {};
+Primary.parameters = {};
 `;
 
 // component.test.tsx
