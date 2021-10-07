@@ -48,7 +48,7 @@ if (fs.existsSync(fullDir)) {
   process.exit(0)
 }
 
-// create the folder
+// 1. create the folder
 fs.mkdirSync(fullDir)
 
 function writeFileErrorHandler(err) {

@@ -11,7 +11,7 @@ npx rsb-gen ComponentName
 By default a folder with required files will be generated under /src. But the component path can be specified as second argument.
 
 ```
-npx rsb-gen SimpleCard components/cards
+npx rsb-gen SimpleCard atoms/cards
 ```
 
 ### Sample output
