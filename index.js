@@ -4,57 +4,52 @@ const fs = require('fs')
 let { component, story, testScript, barrel } = require('./templates.js')
 
 // grab component componentName from terminal argument
-const [componentName] = process.argv.slice(2)
-if (!componentName) {
+const [componentPath] = process.argv.slice(2)
+
+// Terminate if the component path is missing
+if (!componentPath) {
   console.clear()
   console.log(chalk.yellow(`You must include a component name!`))
   console.log(
     chalk.hex('#aaa')(`Example: `),
     chalk.white(
-      `npx rsb-comp ComponentName componentPath${chalk.hex('#777')(
-        `(ex: components/cards)(optional)`,
+      `npx rsb-gen path/ComponentName ${chalk.hex('#777')(
+        `(ex: atoms/Card01 will create src/components/atoms/Card01)`,
       )}`,
     ),
   )
   console.log()
-  console.log(
-    chalk.hex('#aaa')(
-      `Component will be created under ${chalk.white(
-        `src/`,
-      )} if no path is specified.\n`,
-    ),
-  )
-
   process.exit(0)
 }
 
-// grab component type from terminal argument
-const [filePath] = process.argv.slice(3) // throw an error if the file path does not exit.
-if (filePath && !fs.existsSync(`./src/${filePath}`)) {
+const fullDir = `./src/components/${componentPath}`
+const parentDir = fullDir.split('/').slice(0, -1).join('/')
+const componentName = fullDir.split('/').slice(-1)
+
+// Terminate if the parent directory does not exist.
+if (!fs.existsSync(parentDir)) {
   console.log(
     chalk.red(`
-    Error! Component path ${`./src/${filePath}`} does not exist.
+    Parent directory ${parentDir} does not exist.
   `),
+
+    'Have you created the directories src/components ?',
   )
   process.exit(0)
 }
 
-const dir = filePath
-  ? `./src/${filePath}/${componentName}`
-  : `./src/${componentName}`
-
-// throw an error if the file already exists
-if (fs.existsSync(dir)) {
+// Terminate if the component already exists.
+if (fs.existsSync(fullDir)) {
   console.log(
     chalk.red(`
-    Component ${dir} already exists.
+    Component directory ${fullDir} already exists.
   `),
   )
   process.exit(0)
 }
 
 // create the folder
-fs.mkdirSync(dir)
+fs.mkdirSync(fullDir)
 
 function writeFileErrorHandler(err) {
   if (err) throw err
@@ -62,29 +57,33 @@ function writeFileErrorHandler(err) {
 
 // component.tsx
 fs.writeFile(
-  `${dir}/${componentName}.tsx`,
+  `${fullDir}/${componentName}.tsx`,
   component(componentName),
   writeFileErrorHandler,
 )
 // storybook.jsx
 fs.writeFile(
-  `${dir}/${componentName}.stories.tsx`,
-  story(componentName, filePath),
+  `${fullDir}/${componentName}.stories.tsx`,
+  story(componentName, componentPath),
   writeFileErrorHandler,
 )
 // test.tsx
 // Test will be added again with better arguments.
 fs.writeFile(
-  `${dir}/${componentName}.test.tsx`,
+  `${fullDir}/${componentName}.test.tsx`,
   testScript(componentName),
   writeFileErrorHandler,
 )
 // index.tsx
-fs.writeFile(`${dir}/index.ts`, barrel(componentName), writeFileErrorHandler)
+fs.writeFile(
+  `${fullDir}/index.ts`,
+  barrel(componentName),
+  writeFileErrorHandler,
+)
 
 console.log(
   chalk.green(`
   Success! The component ${componentName} is created.
-  Path: ${dir}
+  Path: ${parentDir}/${componentName}
   `),
 )
