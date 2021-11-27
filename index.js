@@ -9,47 +9,43 @@ const [componentPath] = process.argv.slice(2)
 // Terminate if the component path is missing
 if (!componentPath) {
   console.clear()
-  console.log(chalk.yellow(`You must include a component name!`))
+  console.log(chalk.red(`You must include a component name!`))
+  console.log()
   console.log(
     chalk.hex('#aaa')(`Example: `),
-    chalk.white(
-      `npx rsb-gen path/ComponentName ${chalk.hex('#777')(
-        `(ex: atoms/Card01 will create src/components/atoms/Card01)`,
-      )}`,
-    ),
+    chalk.white(`npx rsb-gen src/components/atoms/Card01`),
   )
+
+  console.log(chalk.hex('#777')(`Mention the path from the project root.`))
   console.log()
   process.exit(0)
 }
 
-const fullDir = `./src/components/${componentPath}`
-const parentDir = fullDir.split('/').slice(0, -1).join('/')
-const componentName = fullDir.split('/').slice(-1)
+const parentDir = componentPath.split('/').slice(0, -1).join('/') || '/'
+const componentName = componentPath.split('/').slice(-1)
 
 // Terminate if the parent directory does not exist.
 if (!fs.existsSync(parentDir)) {
   console.log(
     chalk.red(`
-    Parent directory ${parentDir} does not exist.
+  Parent directory ${parentDir} does not exist.
   `),
-
-    'Have you created the directories src/components ?',
   )
   process.exit(0)
 }
 
 // Terminate if the component already exists.
-if (fs.existsSync(fullDir)) {
+if (fs.existsSync(componentPath)) {
   console.log(
     chalk.red(`
-    Component directory ${fullDir} already exists.
+  Component directory ${componentPath} already exists.
   `),
   )
   process.exit(0)
 }
 
 // 1. create the folder
-fs.mkdirSync(fullDir)
+fs.mkdirSync(componentPath)
 
 function writeFileErrorHandler(err) {
   if (err) throw err
@@ -57,33 +53,33 @@ function writeFileErrorHandler(err) {
 
 // component.tsx
 fs.writeFile(
-  `${fullDir}/${componentName}.tsx`,
+  `${componentPath}/${componentName}.tsx`,
   component(componentName),
   writeFileErrorHandler,
 )
 // storybook.jsx
 fs.writeFile(
-  `${fullDir}/${componentName}.stories.tsx`,
+  `${componentPath}/${componentName}.stories.tsx`,
   story(componentName, componentPath),
   writeFileErrorHandler,
 )
 // test.tsx
 // Test will be added again with better arguments.
 fs.writeFile(
-  `${fullDir}/${componentName}.test.tsx`,
+  `${componentPath}/${componentName}.test.tsx`,
   testScript(componentName),
   writeFileErrorHandler,
 )
 // index.tsx
 fs.writeFile(
-  `${fullDir}/index.ts`,
+  `${componentPath}/index.ts`,
   barrel(componentName),
   writeFileErrorHandler,
 )
 
 console.log(
   chalk.green(`
-  Success! The component ${componentName} is created.
-  Path: ${parentDir}/${componentName}
+  Success! The component ${chalk.white(componentName)} is created.
+  Path: ${componentPath}
   `),
 )

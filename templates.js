@@ -1,18 +1,14 @@
 // component.tsx
 exports.component = (
   componentName,
-) => `export interface I${componentName}Props { }
+) => `export interface I${componentName}Props {}
 
-  const ${componentName} = ({ }: I${componentName}Props) => {
-    return (
-      <div>
-        Hello, This is ${componentName} component!
-      </div>
-    )
-  }
+const ${componentName} = ({}: I${componentName}Props) => {
+  return <div>Hello, This is ${componentName} component!</div>
+}
 
-  export default ${componentName}
-  `
+export default ${componentName}
+`
 
 // component.stories.tsx
 exports.story = (componentName, componentType) => `import React from 'react'
@@ -20,8 +16,8 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import ${componentName} from './${componentName}'
 
 export default {
-    title: '${componentType}',
-    component: ${componentName},
+  title: '${componentType}',
+  component: ${componentName},
 } as ComponentMeta<typeof ${componentName}>
 
 const Template: ComponentStory<typeof ${componentName}> = (args) => <${componentName} {...args} />
@@ -37,9 +33,8 @@ import { render } from '@testing-library/react'
 import ${componentName} from './${componentName}'
 
 describe('${componentName} Component', () => {
-  test('it should match the snapshot', () => {
-    const { asFragment } = render(<${componentName} />)
-    expect(asFragment()).toMatchSnapshot()
+  test('${componentName} renders', () => {
+    render(<${componentName} />)
   })
 })
 `
@@ -49,5 +44,5 @@ exports.barrel = (
   componentName,
 ) => `import ${componentName} from './${componentName}'
 
-  export default ${componentName}
-  `
+export default ${componentName}
+`
