@@ -1,6 +1,6 @@
 # rsb-gen
 
-Automate react component creation with a corresponding storybook component with a simple command.
+Automate react component creation with a corresponding storybook component with a simple command. The below command creates the component in the project root.
 
 ```
 npx rsb-gen ComponentName
@@ -8,10 +8,10 @@ npx rsb-gen ComponentName
 
 ### Component location
 
-By default a folder with required files will be generated under /src. But the component path can be specified as second argument.
+Specify the component path from the project root.
 
 ```
-npx rsb-gen SimpleCard atoms/cards
+npx rsb-gen src/components/atoms/MainCard
 ```
 
 ### Sample output
