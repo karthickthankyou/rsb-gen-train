@@ -28,13 +28,12 @@ Primary.parameters = {}
 `
 
 // component.test.tsx
-exports.testScript = (componentName) => `import React from 'react'
-import { render } from '@testing-library/react'
+exports.testScript = (componentName) => `import { mount } from '@cypress/react'
 import ${componentName} from './${componentName}'
 
 describe('${componentName} Component', () => {
-  test('${componentName} renders', () => {
-    render(<${componentName} />)
+  it('${componentName} renders', () => {
+    mount(<${componentName} />)
   })
 })
 `
