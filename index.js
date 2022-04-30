@@ -1,10 +1,18 @@
 #!/usr/bin/env node
 const chalk = require('chalk')
 const fs = require('fs')
-let { component, story, testScript, barrel } = require('./templates.js')
+let {
+  component,
+  story,
+  testScript,
+  barrel,
+  jestTestScript,
+  cypressTestScript,
+} = require('./templates.js')
 
 // grab component componentName from terminal argument
-const [componentPath] = process.argv.slice(2)
+const [componentPath, testType] = process.argv.slice(2, 4)
+console.log(componentPath, testType)
 
 // Terminate if the component path is missing
 if (!componentPath) {
@@ -53,7 +61,7 @@ function writeFileErrorHandler(err) {
 
 // component.tsx
 fs.writeFile(
-  `${componentPath}/${componentName}.tsx`,
+  `${componentPath}/index.tsx`,
   component(componentName),
   writeFileErrorHandler,
 )
@@ -65,17 +73,27 @@ fs.writeFile(
 )
 // test.tsx
 // Test will be added again with better arguments.
-fs.writeFile(
-  `${componentPath}/${componentName}.test.tsx`,
-  testScript(componentName),
-  writeFileErrorHandler,
-)
+if (['-c', '--cypress'].includes(testType)) {
+  fs.writeFile(
+    `${componentPath}/${componentName}.spec.tsx`,
+    cypressTestScript(componentName),
+    writeFileErrorHandler,
+  )
+}
+if (['-j', '--jest'].includes(testType)) {
+  fs.writeFile(
+    `${componentPath}/${componentName}.test.tsx`,
+    jestTestScript(componentName),
+    writeFileErrorHandler,
+  )
+}
+
 // index.tsx
-fs.writeFile(
-  `${componentPath}/index.ts`,
-  barrel(componentName),
-  writeFileErrorHandler,
-)
+// fs.writeFile(
+//   `${componentPath}/index.ts`,
+//   barrel(componentName),
+//   writeFileErrorHandler,
+// )
 
 console.log(
   chalk.green(`

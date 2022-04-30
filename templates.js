@@ -28,7 +28,9 @@ Primary.parameters = {}
 `
 
 // component.test.tsx
-exports.testScript = (componentName) => `import { mount } from '@cypress/react'
+exports.cypressTestScript = (
+  componentName,
+) => `import { mount } from '@cypress/react'
 import ${componentName} from './${componentName}'
 
 describe('${componentName} Component', () => {
@@ -36,6 +38,18 @@ describe('${componentName} Component', () => {
     mount(<${componentName} />)
   })
 })
+`
+
+// component.test.tsx
+exports.jestTestScript = (componentName) => `import React from 'react';
+import { render } from '@testing-library/react';
+import ${componentName} from './${componentName}';
+describe('${componentName} Component', () => {
+  test('it should match the snapshot', () => {
+    const { asFragment } = render(<${componentName} />);
+    expect(asFragment()).toMatchSnapshot();
+  });
+});
 `
 
 // index.ts
