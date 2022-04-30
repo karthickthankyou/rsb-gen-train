@@ -14,6 +14,14 @@ Specify the component path from the project root.
 npx rsb-gen src/components/atoms/MainCard
 ```
 
+### Test file (Optional)
+
+Valid options are -c, --cypress, -j, --jest.
+
+```
+npx rsb-gen src/components/atoms/MainCard --cypress
+```
+
 ### Files
 
 ```

@@ -12,7 +12,6 @@ let {
 
 // grab component componentName from terminal argument
 const [componentPath, testType] = process.argv.slice(2, 4)
-console.log(componentPath, testType)
 
 // Terminate if the component path is missing
 if (!componentPath) {
@@ -26,6 +25,23 @@ if (!componentPath) {
 
   console.log(chalk.hex('#777')(`Mention the path from the project root.`))
   console.log()
+  process.exit(0)
+}
+
+if (testType && !['-c', '--cypress', '-j', '--jest'].includes(testType)) {
+  console.log(
+    chalk.red(`The test type included is invalid.
+  `),
+  )
+  console.log(
+    chalk.hex('#aaa')(`Valid options are -c, --cypress, -j, and --jest.
+    `),
+
+    chalk.white(`
+Example: npx rsb-gen src/components/atoms/Card01 --jest
+`),
+  )
+
   process.exit(0)
 }
 

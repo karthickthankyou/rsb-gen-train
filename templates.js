@@ -13,7 +13,7 @@ export default ${componentName}
 // component.stories.tsx
 exports.story = (componentName, componentType) => `import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import ${componentName} from './${componentName}'
+import ${componentName} from './index'
 
 export default {
   title: '${componentType}',
@@ -31,7 +31,7 @@ Primary.parameters = {}
 exports.cypressTestScript = (
   componentName,
 ) => `import { mount } from '@cypress/react'
-import ${componentName} from './${componentName}'
+import ${componentName} from './index'
 
 describe('${componentName} Component', () => {
   it('${componentName} renders', () => {
@@ -43,7 +43,8 @@ describe('${componentName} Component', () => {
 // component.test.tsx
 exports.jestTestScript = (componentName) => `import React from 'react';
 import { render } from '@testing-library/react';
-import ${componentName} from './${componentName}';
+import ${componentName} from './index';
+
 describe('${componentName} Component', () => {
   test('it should match the snapshot', () => {
     const { asFragment } = render(<${componentName} />);
