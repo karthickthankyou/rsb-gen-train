@@ -77,7 +77,7 @@ function writeFileErrorHandler(err) {
 
 // component.tsx
 fs.writeFile(
-  `${componentPath}/index.tsx`,
+  `${componentPath}/${componentName}.tsx`,
   component(componentName),
   writeFileErrorHandler,
 )
@@ -104,12 +104,11 @@ if (['-j', '--jest'].includes(testType)) {
   )
 }
 
-// index.tsx
-// fs.writeFile(
-//   `${componentPath}/index.ts`,
-//   barrel(componentName),
-//   writeFileErrorHandler,
-// )
+fs.writeFile(
+  `${componentPath}/index.ts`,
+  barrel(componentName),
+  writeFileErrorHandler,
+)
 
 console.log(
   chalk.green(`
