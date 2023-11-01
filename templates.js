@@ -3,28 +3,29 @@ exports.component = (
   componentName,
 ) => `export interface I${componentName}Props {}
 
-const ${componentName} = ({}: I${componentName}Props) => {
+export const ${componentName} = ({}: I${componentName}Props) => {
   return <div>Hello, This is ${componentName} component!</div>
 }
-
-export default ${componentName}
 `
 
 // component.stories.tsx
-exports.story = (componentName, componentType) => `import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import ${componentName} from './index'
+exports.story = (componentName, componentType) => `
+import type { Meta, StoryObj } from '@storybook/react';
+import { ${componentName} } from './${componentName}';
 
-export default {
-  title: '${componentType}',
+const meta: Meta<typeof ${componentName}> = {
+  title: '${componentType}/${componentName}',
   component: ${componentName},
-} as ComponentMeta<typeof ${componentName}>
+  tags: ['autodocs'],
+};
 
-const Template: ComponentStory<typeof ${componentName}> = (args) => <${componentName} {...args} />
+export default meta;
 
-export const Primary = Template.bind({})
-Primary.args = {}
-Primary.parameters = {}
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
+  args: {},
+};
 `
 
 // component.test.tsx
@@ -56,7 +57,5 @@ describe('${componentName} Component', () => {
 // index.ts
 exports.barrel = (
   componentName,
-) => `import ${componentName} from './${componentName}'
-
-export default ${componentName}
+) => `export ${componentName} from './${componentName}'
 `
