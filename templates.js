@@ -57,5 +57,5 @@ describe('${componentName} Component', () => {
 // index.ts
 exports.barrel = (
   componentName,
-) => `export ${componentName} from './${componentName}'
+) => `export {${componentName}} from './${componentName}'
 `
